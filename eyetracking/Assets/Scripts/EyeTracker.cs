@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
+
 
 public class EyeTracker : MonoBehaviour
 {
@@ -69,10 +71,10 @@ public class EyeTracker : MonoBehaviour
 private void CheckGaze()
 {
     Debug.Log("Checking gaze...");
+
     Vector3 eyeCenterPosition = (leftEye.transform.position + rightEye.transform.position) / 2f;
     Vector3 gazeDirection = (leftEye.transform.forward + rightEye.transform.forward) / 2f; // Updated line
 
-    //Vector3 gazeDirection = transform.forward;
 
     Ray ray = new Ray(eyeCenterPosition, gazeDirection);
     RaycastHit hit;
