@@ -100,7 +100,7 @@ private void CheckGaze()
         }
         else
         {
-            Debug.Log("Not looking at any object");
+            //Debug.Log("Not looking at any object");
             if (currentGazeTarget != null)
             {
                 currentGazeTarget.SendMessage("OnGazeExit", SendMessageOptions.DontRequireReceiver);
@@ -110,7 +110,7 @@ private void CheckGaze()
     }
     else
     {
-        Debug.Log("Not looking at any object");
+        //Debug.Log("Not looking at any object");
         if (currentGazeTarget != null)
         {
             currentGazeTarget.SendMessage("OnGazeExit", SendMessageOptions.DontRequireReceiver);
