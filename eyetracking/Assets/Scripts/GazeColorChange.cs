@@ -23,4 +23,8 @@ public class GazeColorChange : MonoBehaviour
         Debug.Log("OnGazeExit called. Changing color to: " + normalColor);
         material.color = normalColor;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> parent of fba6a12 (Data logger(adjusted))
