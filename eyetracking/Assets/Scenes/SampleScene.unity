@@ -629,7 +629,10 @@ PrefabInstance:
       propertyPath: normalColor.r
       value: 0.15104532
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1208798128997345583, guid: e30cd9e40662043409d08ddc444121e6, type: 3}
+    - {fileID: 1208798128205911540, guid: e30cd9e40662043409d08ddc444121e6, type: 3}
+    - {fileID: 1208798127546822461, guid: e30cd9e40662043409d08ddc444121e6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e30cd9e40662043409d08ddc444121e6, type: 3}
 --- !u!1 &1120789751 stripped
 GameObject:
@@ -649,6 +652,48 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1120789750}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1120789754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120789751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 731885d19e6dc1045a0239882972333e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalColor: {r: 0, g: 0.1903081, b: 1, a: 1}
+  gazeColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &1120789755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120789752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 731885d19e6dc1045a0239882972333e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalColor: {r: 0, g: 0.1903081, b: 1, a: 1}
+  gazeColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &1120789756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120789753}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 731885d19e6dc1045a0239882972333e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalColor: {r: 0, g: 0.1903081, b: 1, a: 1}
+  gazeColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1725982592
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,8 +784,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lth: 0.15
-  filenameBase: GazeData
-  data: []
   eyeTracker: {fileID: 1725982595}
 --- !u!1 &1728657555
 GameObject:
