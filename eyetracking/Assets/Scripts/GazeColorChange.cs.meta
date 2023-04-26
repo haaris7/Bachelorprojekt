@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 731885d19e6dc1045a0239882972333e
+=======
+guid: 4cc21fa248050d54a9f273bdac2b02a2
+>>>>>>> parent of fba6a12 (Data logger(adjusted))
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
