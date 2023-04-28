@@ -16,7 +16,6 @@ public class EyeTracker2 : MonoBehaviour
     [SerializeField]
     private float gazeDistance = 10f;
     public Vector3 gazePoint;
-    // public Vector3 gazeRot;
     public string TargetName = "";
 
     private void Start()
@@ -39,8 +38,6 @@ public class EyeTracker2 : MonoBehaviour
 
     private void CheckGaze()
     {
-        
-
         List<InputDevice> devices = new List<InputDevice>();
         InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.HeadMounted, devices);
 
@@ -62,9 +59,7 @@ public class EyeTracker2 : MonoBehaviour
                 Vector3 leftEyeForward = leftEyeRotation * Vector3.forward;
                 Vector3 rightEyeForward = rightEyeRotation * Vector3.forward;
                 Vector3 gazeDirection = (leftEyeForward + rightEyeForward) / 2f;
-                
 
-                // Transform eyeCenterPosition and gazeDirection from local space to world space
                 eyeCenterPosition = transform.TransformPoint(eyeCenterPosition);
                 gazeDirection = transform.TransformDirection(gazeDirection);
                 gazePoint = (gazeDirection*gazeDistance);
@@ -76,10 +71,20 @@ public class EyeTracker2 : MonoBehaviour
                 {
                     GameObject hitObject = hit.collider.gameObject;
 
-                    if (gazeTargets.Contains(hitObject))
+                    bool isValidTarget = false;
+
+                    foreach (GameObject parent in gazeTargets)
+                    {
+                        if (parent.transform == hitObject.transform || hitObject.transform.IsChildOf(parent.transform))
+                        {
+                            isValidTarget = true;
+                            break;
+                        }
+                    }
+
+                    if (isValidTarget)
                     {
                         TargetName = hitObject.name;
-                        //Debug.Log("Raycast hit: " + hitObject.name + " at distance: " + hit.distance + " at point: " + hit.point);
 
                         if (currentGazeTarget != hitObject)
                         {
@@ -94,7 +99,6 @@ public class EyeTracker2 : MonoBehaviour
                     }
                     else
                     {
-                        //Debug.Log("Not looking at any object");
                         if (currentGazeTarget != null)
                         {
                             currentGazeTarget.SendMessage("OnGazeExit", SendMessageOptions.DontRequireReceiver);
@@ -104,9 +108,6 @@ public class EyeTracker2 : MonoBehaviour
                 }
                 else
                 {
-                    //Debug.Log("gaze pos: "+ (gazeDirection*gazeDistance));
-
-                    //Debug.Log("Not looking at any object");
                     if (currentGazeTarget != null)
                     {
                         currentGazeTarget.SendMessage("OnGazeExit", SendMessageOptions.DontRequireReceiver);
@@ -119,3 +120,4 @@ public class EyeTracker2 : MonoBehaviour
         }
     }
 }
+
