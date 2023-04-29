@@ -3,17 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System.Diagnostics;
 
 public class DataLogger : MonoBehaviour
 {
     public float lth = 0.5f;
     private Vector3 prevpos;
     private char sep = ';';
-    private string header = "Timestamp;Target;PosX;PosY;PosZ";
+    private string header = "Timestamp;Region;Target;PosX;PosY;PosZ";
     private string filenameBase = "GazeData";
     private string pathPrefix = "Assets/Scripts/Data/";
     private string path;
+    public int activeregion = 0;
+    public bool IsLogging = false;
     public EyeTracker2 eyeTracker;
+    public float previousTime;
+    public float period = 0.1f;
+
     
 
     void Start()
@@ -29,16 +35,32 @@ public class DataLogger : MonoBehaviour
     }
 
 
+    // void Update()
+    // {
+    //     if(IsLogging)
+    //     {
+    //         Vector3 curpos = eyeTracker.gazePoint;
+    //         float distance = Vector3.Distance(curpos,prevpos);
+    //         if(distance > lth)
+    //         {
+    //             Log(curpos);
+    //             prevpos = eyeTracker.gazePoint;
+    //         }
+    //     }
+    // }
     void Update()
-    { 
-        Vector3 curpos = eyeTracker.gazePoint;
-        float distance = Vector3.Distance(curpos,prevpos);
-        if(distance > lth)
+    {
+        if(IsLogging)
         {
-            Log(curpos);
-            prevpos = eyeTracker.gazePoint;
+            // float time = Time.time-previousTime;
+            // UnityEngine.Debug.Log(time);
+            Vector3 curpos = eyeTracker.gazePoint;
+            if(Time.time-previousTime > period)
+            {
+                Log(curpos);
+                previousTime = Time.time;
+            }
         }
-        
     }
 
     public static String GetTimestamp(DateTime value)
@@ -82,6 +104,7 @@ public class DataLogger : MonoBehaviour
     public void Log(Vector3 pos)
     {
         string line = GetTimestamp(DateTime.Now)+";";
+        line += activeregion+";";
         line += DetermineTarget()+";";
         line += ItemsMerged(sep, Vector3ToStringArray(pos));
         using(StreamWriter writer = new StreamWriter(path,true))
@@ -89,6 +112,21 @@ public class DataLogger : MonoBehaviour
             writer.WriteLine(line);
         }
 
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Start")
+        {
+            IsLogging = true;
+            // UnityEngine.Debug.Log("Enter");
+            activeregion++;
+            previousTime = Time.time;
+        }
+        else if(other.tag == "Stop")
+        {
+            // UnityEngine.Debug.Log("Exit");
+            IsLogging = false;
+        }
     }
 }
 
