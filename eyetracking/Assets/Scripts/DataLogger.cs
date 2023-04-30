@@ -24,7 +24,7 @@ public class DataLogger : MonoBehaviour
 
     void Start()
     {
-        path = pathPrefix + filenameBase + System.DateTime.Now.ToString("ddmmyyyy-HHmmss")+".csv";
+        path = genFileName();
         FileStream fs = File.Create(path);
         fs.Close();
         prevpos = eyeTracker.gazePoint;
@@ -48,6 +48,26 @@ public class DataLogger : MonoBehaviour
     //         }
     //     }
     // }
+
+    public string genFileName()
+    {
+        int counter = 1;
+        string ret = pathPrefix + filenameBase + counter + ".csv";
+        string[] dir = Directory.GetFiles(pathPrefix);
+        if (dir.Length != 0)
+        {
+            foreach (string item in dir)
+            {
+                ret = pathPrefix + filenameBase + counter + ".csv";
+                if (item == pathPrefix + filenameBase + counter + ".csv")
+                {
+                    counter++;
+                }
+            }
+        }
+        
+        return ret;
+    }
     void Update()
     {
         if(IsLogging)
@@ -103,7 +123,7 @@ public class DataLogger : MonoBehaviour
 
     public void Log(Vector3 pos)
     {
-        string line = GetTimestamp(DateTime.Now)+";";
+        string line = Time.time +";";
         line += activeregion+";";
         line += DetermineTarget()+";";
         line += ItemsMerged(sep, Vector3ToStringArray(pos));
