@@ -19,6 +19,11 @@ public class DataLogger : MonoBehaviour
     public EyeTracker2 eyeTracker;
     public float previousTime;
     public float period = 0.1f;
+    public int width = 1920;
+    public int height = 1080;
+    public string currentFileName = "";
+    
+
 
     
 
@@ -35,19 +40,20 @@ public class DataLogger : MonoBehaviour
     }
 
 
-    // void Update()
-    // {
-    //     if(IsLogging)
-    //     {
-    //         Vector3 curpos = eyeTracker.gazePoint;
-    //         float distance = Vector3.Distance(curpos,prevpos);
-    //         if(distance > lth)
-    //         {
-    //             Log(curpos);
-    //             prevpos = eyeTracker.gazePoint;
-    //         }
-    //     }
-    // }
+    void Update()
+    {
+        if(IsLogging)
+        {
+            Vector3 curpos = eyeTracker.gazePoint;
+            float distance = Vector3.Distance(curpos,prevpos);
+            if(distance > lth)
+            {
+                Log(curpos);
+                prevpos = eyeTracker.gazePoint;
+            }
+        }
+    }
+
 
     public string genFileName()
     {
@@ -65,23 +71,28 @@ public class DataLogger : MonoBehaviour
                 }
             }
         }
-        
+        currentFileName = filenameBase+"("+counter+")_";
         return ret;
     }
-    void Update()
+    public string genImageName()
     {
-        if(IsLogging)
-        {
-            // float time = Time.time-previousTime;
-            // UnityEngine.Debug.Log(time);
-            Vector3 curpos = eyeTracker.gazePoint;
-            if(Time.time-previousTime > period)
-            {
-                Log(curpos);
-                previousTime = Time.time;
-            }
-        }
+        string pth = "Screenshot_"+currentFileName+"Region"+"("+activeregion+")"+ ".png";
+        return pth;
     }
+    // void Update()
+    // {
+    //     if(IsLogging)
+    //     {
+    //         // float time = Time.time-previousTime;
+    //         // UnityEngine.Debug.Log(time);
+    //         Vector3 curpos = eyeTracker.gazePoint;
+    //         if(Time.time-previousTime > period)
+    //         {
+    //             Log(curpos);
+    //             previousTime = Time.time;
+    //         }
+    //     }
+    // }
 
     public static String GetTimestamp(DateTime value)
     {
@@ -133,12 +144,29 @@ public class DataLogger : MonoBehaviour
         }
 
     }
+    void TakeScreenshot(Camera cam)
+    {
+        RenderTexture rt = new RenderTexture(width, height, 24);
+        cam.targetTexture = rt;
+        Texture2D screenShot = new Texture2D(width, height, TextureFormat.RGB24, false);
+        cam.Render();
+        RenderTexture.active = rt;
+        screenShot.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+        cam.targetTexture = null;
+        RenderTexture.active = null;
+        Destroy(rt);
+        byte[] bytes = screenShot.EncodeToPNG();
+        string filename = Path.Combine(@"Assets\Scripts\Data\Screenshots",genImageName());
+        File.WriteAllBytes(filename, bytes);
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Start")
         {
+            TakeScreenshot(other.gameObject.GetComponent<Camera>());
             IsLogging = true;
             // UnityEngine.Debug.Log("Enter");
+
             activeregion++;
             previousTime = Time.time;
         }
