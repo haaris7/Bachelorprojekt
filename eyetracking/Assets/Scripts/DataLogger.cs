@@ -22,6 +22,7 @@ public class DataLogger : MonoBehaviour
     public int width = 1920;
     public int height = 1080;
     public string currentFileName = "";
+    public Camera camera;
     
 
 
@@ -132,17 +133,32 @@ public class DataLogger : MonoBehaviour
         return txt;
     }
 
+    // public void Log(Vector3 pos)
+    // {
+    //     string line = Time.time +";";
+    //     line += activeregion+";";
+    //     line += DetermineTarget()+";";
+    //     line += ItemsMerged(sep, Vector3ToStringArray(pos));
+    //     using(StreamWriter writer = new StreamWriter(path,true))
+    //     {
+    //         writer.WriteLine(line);
+    //     }
+
+    // }
+
     public void Log(Vector3 pos)
     {
+        // Assuming you have a reference to your camera
+        Vector2 pos2D = camera.WorldToViewportPoint(pos);
+
         string line = Time.time +";";
         line += activeregion+";";
         line += DetermineTarget()+";";
-        line += ItemsMerged(sep, Vector3ToStringArray(pos));
+        line += pos2D.x + ";" + pos2D.y;
         using(StreamWriter writer = new StreamWriter(path,true))
         {
             writer.WriteLine(line);
         }
-
     }
     void TakeScreenshot(Camera cam)
     {
@@ -163,7 +179,8 @@ public class DataLogger : MonoBehaviour
     {
         if(other.tag == "Start")
         {
-            TakeScreenshot(other.gameObject.GetComponent<Camera>());
+            camera = other.gameObject.GetComponent<Camera>();
+            TakeScreenshot(camera);
             IsLogging = true;
             // UnityEngine.Debug.Log("Enter");
 
