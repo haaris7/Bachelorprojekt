@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028444, g: 0.22571442, b: 0.30692387, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028402, g: 0.22571374, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 32122987}
   - component: {fileID: 32122986}
   - component: {fileID: 32122985}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a4865988cbd433646b720a347a6193ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -248,7 +248,7 @@ Transform:
   m_GameObject: {fileID: 100458393}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.46, y: -2.5, z: 6.91}
-  m_LocalScale: {x: 0.75, y: 1, z: 0.75}
+  m_LocalScale: {x: 0.85, y: 1, z: 0.85}
   m_Children: []
   m_Father: {fileID: 209446895}
   m_RootOrder: 1
@@ -482,7 +482,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 209446894}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.827072, y: 0, z: 2.1878972}
+  m_LocalPosition: {x: 13.5, y: 7.9, z: 13.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1757251825}
@@ -1311,7 +1311,7 @@ Transform:
   m_GameObject: {fileID: 544531605}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 9.71, y: -2.5, z: 3.91}
-  m_LocalScale: {x: 0.75, y: 1, z: 0.75}
+  m_LocalScale: {x: 0.85, y: 1, z: 0.85}
   m_Children: []
   m_Father: {fileID: 209446895}
   m_RootOrder: 3
@@ -2822,7 +2822,7 @@ GameObject:
   - component: {fileID: 1429516813}
   - component: {fileID: 1429516812}
   - component: {fileID: 1429516811}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2876,7 +2876,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a4865988cbd433646b720a347a6193ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3298,7 +3298,7 @@ Transform:
   m_GameObject: {fileID: 1757251824}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.46, y: -2.5, z: 5.41}
-  m_LocalScale: {x: 0.75, y: 1, z: 0.75}
+  m_LocalScale: {x: 0.85, y: 1, z: 0.85}
   m_Children: []
   m_Father: {fileID: 209446895}
   m_RootOrder: 0
@@ -3641,7 +3641,7 @@ GameObject:
   - component: {fileID: 1918569719}
   - component: {fileID: 1918569718}
   - component: {fileID: 1918569717}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3695,7 +3695,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a4865988cbd433646b720a347a6193ae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3754,7 +3754,7 @@ Transform:
   m_GameObject: {fileID: 1945582646}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.71, y: -2.5, z: 5.41}
-  m_LocalScale: {x: 0.75, y: 1, z: 0.75}
+  m_LocalScale: {x: 0.85, y: 1, z: 0.85}
   m_Children: []
   m_Father: {fileID: 209446895}
   m_RootOrder: 2
