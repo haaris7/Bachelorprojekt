@@ -14,13 +14,13 @@ public class GazeColorChange : MonoBehaviour
 
     public void OnGazeEnter()
     {
-        Debug.Log("OnGazeEnter called. Changing color to: " + gazeColor);
+        // Debug.Log("OnGazeEnter called. Changing color to: " + gazeColor);
         material.color = gazeColor;
     }
 
     public void OnGazeExit()
     {
-        Debug.Log("OnGazeExit called. Changing color to: " + normalColor);
+        // Debug.Log("OnGazeExit called. Changing color to: " + normalColor);
         material.color = normalColor;
     }
 

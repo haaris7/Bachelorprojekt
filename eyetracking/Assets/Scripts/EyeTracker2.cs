@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+using System.IO;
 
 public class EyeTracker2 : MonoBehaviour
 {
-    public float nextActionTime = 0.0f;
-    public float period = 1.0f;
+
+    public float period = 0.15f;
     public List<GameObject> gazeTargets = new List<GameObject>();
     private LineRenderer lineRenderer;
 
@@ -17,9 +18,14 @@ public class EyeTracker2 : MonoBehaviour
     private float gazeDistance = 10f;
     public Vector3 gazePoint;
     public string TargetName = "";
-
+    private float previoustime;
+    public DataLogger dataLogger;
+    
+    public string filename = "HeatData";
+    public List<Vector2> data;
     private void Start()
     {
+        previoustime = Time.time;
         Debug.Log("Checking gaze...");
         lineRenderer = gameObject.AddComponent<LineRenderer>();
         lineRenderer.startWidth = 0.01f;
@@ -62,11 +68,11 @@ public class EyeTracker2 : MonoBehaviour
 
                 eyeCenterPosition = transform.TransformPoint(eyeCenterPosition);
                 gazeDirection = transform.TransformDirection(gazeDirection);
-                gazePoint = (gazeDirection*gazeDistance);
+                gazePoint = (gazeDirection * gazeDistance);
 
                 Ray ray = new Ray(eyeCenterPosition, gazeDirection);
                 RaycastHit hit;
-
+                GetTextureCoord(ray);
                 if (Physics.Raycast(ray, out hit, gazeDistance, gazeLayerMask))
                 {
                     GameObject hitObject = hit.collider.gameObject;
@@ -85,18 +91,19 @@ public class EyeTracker2 : MonoBehaviour
                     if (isValidTarget)
                     {
                         TargetName = hitObject.name;
-
                         if (currentGazeTarget != hitObject)
                         {
                             if (currentGazeTarget != null)
-                            {
+                            {        
                                 currentGazeTarget.SendMessage("OnGazeExit", SendMessageOptions.DontRequireReceiver);
                             }
 
                             currentGazeTarget = hitObject;
                             currentGazeTarget.SendMessage("OnGazeEnter", SendMessageOptions.DontRequireReceiver);
+
                         }
                     }
+
                     else
                     {
                         if (currentGazeTarget != null)
@@ -116,6 +123,46 @@ public class EyeTracker2 : MonoBehaviour
                 }
                 lineRenderer.SetPosition(0, eyeCenterPosition);
                 lineRenderer.SetPosition(1, eyeCenterPosition + gazeDirection * gazeDistance);
+            }
+        }
+    }
+
+    public bool ShouldCheck()
+    {
+        float now = Time.time;
+        if (now - previoustime > period)
+        {
+            previoustime = now;
+            return true;
+        }
+        else return false;
+    }
+    public void WriteCsv()
+    {
+        int count = dataLogger.activeregion-1;
+        string path = dataLogger.pathPrefix + "HeatData(" + count + ").csv"; //activeregion has already been incremented
+        FileStream fs = File.Create(path);
+        fs.Close();
+        foreach (Vector2 i in data)
+        {
+            using (StreamWriter writer = new StreamWriter(path, true))
+            {
+                writer.WriteLine(i);
+            }
+        }
+    }
+
+
+    public Vector2 GetTextureCoord(Ray ray)
+    {
+        if (ShouldCheck() && dataLogger.IsLogging)
+        {
+
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, gazeDistance, LayerMask.GetMask("HeatLayer")) && dataLogger.IsLogging)
+            {
+                Debug.Log("Coordinate: (" + hit.textureCoord.x + "," + hit.textureCoord.y + ")");
+                return hit.textureCoord;
             }
         }
     }

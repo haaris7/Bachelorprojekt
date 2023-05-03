@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Diagnostics;
+using UnityEngine.SceneManagement;
 
 public class DataLogger : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class DataLogger : MonoBehaviour
     private char sep = ';';
     private string header = "Timestamp;Region;Target;PosX;PosY;PosZ";
     private string filenameBase = "GazeData";
-    private string pathPrefix = "Assets/Scripts/Data/";
+    public string pathPrefix = "Assets/Scripts/Data/";
     private string path;
     public int activeregion = 0;
     public bool IsLogging = false;
@@ -23,6 +24,7 @@ public class DataLogger : MonoBehaviour
     public int height = 1080;
     public string currentFileName = "";
     public Camera camera;
+    private string sceneName;
     
 
 
@@ -30,6 +32,7 @@ public class DataLogger : MonoBehaviour
 
     void Start()
     {
+        //sceneName = SceneManager.GetActiveScene().name;
         path = genFileName();
         FileStream fs = File.Create(path);
         fs.Close();
