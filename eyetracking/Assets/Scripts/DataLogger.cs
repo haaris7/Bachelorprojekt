@@ -10,7 +10,6 @@ public class DataLogger : MonoBehaviour
 {
     public float lth = 0.5f;
     private Vector3 prevpos;
-    private char sep = ';';
     private string header = "Timestamp;Region;Target;PosX;PosY;PosZ";
     private string filenameBase = "GazeData";
     public string pathPrefix = "Assets/Scripts/Data/";
@@ -19,7 +18,6 @@ public class DataLogger : MonoBehaviour
     public bool IsLogging = false;
     public EyeTracker2 eyeTracker;
     public float previousTime;
-    public float period = 0.1f;
     public int width = 1920;
     public int height = 1080;
     public string currentFileName = "";
@@ -50,7 +48,7 @@ public class DataLogger : MonoBehaviour
         {
             Vector3 curpos = eyeTracker.gazePoint;
             float distance = Vector3.Distance(curpos,prevpos);
-            if(distance > lth)
+            if(distance > lth && eyeTracker.ShouldCheck())
             {
                 Log(curpos);
                 prevpos = eyeTracker.gazePoint;

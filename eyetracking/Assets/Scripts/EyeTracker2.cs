@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
-using System.IO;
 
 public class EyeTracker2 : MonoBehaviour
 {
-
-    public float period = 0.15f;
+    public float logTimeInterval = 0.15f;
     public List<GameObject> gazeTargets = new List<GameObject>();
     private LineRenderer lineRenderer;
 
@@ -19,10 +17,11 @@ public class EyeTracker2 : MonoBehaviour
     public Vector3 gazePoint;
     public string TargetName = "";
     private float previoustime;
-    public DataLogger dataLogger;
-    
-    public string filename = "HeatData";
-    public List<Vector2> data;
+
+    public bool usePositionThreshold = true;
+    public float positionThreshold = 0.05f;
+    private Vector2 lastLoggedPosition;
+
     private void Start()
     {
         previoustime = Time.time;
@@ -94,7 +93,7 @@ public class EyeTracker2 : MonoBehaviour
                         if (currentGazeTarget != hitObject)
                         {
                             if (currentGazeTarget != null)
-                            {        
+                            {
                                 currentGazeTarget.SendMessage("OnGazeExit", SendMessageOptions.DontRequireReceiver);
                             }
 
@@ -130,41 +129,46 @@ public class EyeTracker2 : MonoBehaviour
     public bool ShouldCheck()
     {
         float now = Time.time;
-        if (now - previoustime > period)
+
+        if (usePositionThreshold)
         {
-            previoustime = now;
-            return true;
-        }
-        else return false;
-    }
-    public void WriteCsv()
-    {
-        int count = dataLogger.activeregion-1;
-        string path = dataLogger.pathPrefix + "HeatData(" + count + ").csv"; //activeregion has already been incremented
-        FileStream fs = File.Create(path);
-        fs.Close();
-        foreach (Vector2 i in data)
-        {
-            using (StreamWriter writer = new StreamWriter(path, true))
+            RaycastHit hit;
+            Ray ray = new Ray(transform.position, transform.forward);
+
+            if (Physics.Raycast(ray, out hit, gazeDistance, gazeLayerMask))
             {
-                writer.WriteLine(i);
+                Vector2 currentTextureCoord = hit.textureCoord;
+
+                if (Vector2.Distance(currentTextureCoord, lastLoggedPosition) > positionThreshold)
+                {
+                    lastLoggedPosition = currentTextureCoord;
+                    return true;
+                }
             }
         }
-    }
+        else
+        {
+            if (now - previoustime > logTimeInterval)
+            {
+                previoustime = now;
+                return true;
+            }
+        }
 
+        return false;
+    }
 
     public Vector2 GetTextureCoord(Ray ray)
     {
-        if (ShouldCheck() && dataLogger.IsLogging)
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, gazeDistance, LayerMask.GetMask("HeatLayer")))
         {
-
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, gazeDistance, LayerMask.GetMask("HeatLayer")) && dataLogger.IsLogging)
-            {
-                Debug.Log("Coordinate: (" + hit.textureCoord.x + "," + hit.textureCoord.y + ")");
-                return hit.textureCoord;
-            }
+            Debug.Log("Coordinate: (" + hit.textureCoord.x + "," + hit.textureCoord.y + ")");
+            return hit.textureCoord;
+        }
+        else
+        {
+            return Vector2.zero;
         }
     }
 }
-
