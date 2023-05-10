@@ -10,18 +10,20 @@ public class DataLogger : MonoBehaviour
 {
     public float lth = 0.5f;
     private Vector3 prevpos;
+    private char sep = ';';
     private string header = "Timestamp;Region;Target;PosX;PosY;PosZ";
     private string filenameBase = "GazeData";
     public string pathPrefix = "Assets/Scripts/Data/";
     private string path;
     public int activeregion = 0;
     public bool IsLogging = false;
-    public EyeTracker2 eyeTracker;
+    public EyeTracker eyeTracker;
     public float previousTime;
+    public float period = 0.1f;
     public int width = 1920;
     public int height = 1080;
     public string currentFileName = "";
-    public Camera camera;
+    public Camera cam;
     private string sceneName;
     
 
@@ -48,7 +50,7 @@ public class DataLogger : MonoBehaviour
         {
             Vector3 curpos = eyeTracker.gazePoint;
             float distance = Vector3.Distance(curpos,prevpos);
-            if(distance > lth && eyeTracker.ShouldCheck())
+            if(distance > lth)
             {
                 Log(curpos);
                 prevpos = eyeTracker.gazePoint;
@@ -150,7 +152,7 @@ public class DataLogger : MonoBehaviour
     public void Log(Vector3 pos)
     {
         // Assuming you have a reference to your camera
-        Vector2 pos2D = camera.WorldToViewportPoint(pos);
+        Vector2 pos2D = cam.WorldToViewportPoint(pos);
 
         string line = Time.time +";";
         line += activeregion+";";
@@ -180,8 +182,8 @@ public class DataLogger : MonoBehaviour
     {
         if(other.tag == "Start")
         {
-            camera = other.gameObject.GetComponent<Camera>();
-            TakeScreenshot(camera);
+            cam = other.gameObject.GetComponent<Camera>();
+            TakeScreenshot(cam);
             IsLogging = true;
             // UnityEngine.Debug.Log("Enter");
 
@@ -195,4 +197,3 @@ public class DataLogger : MonoBehaviour
         }
     }
 }
-

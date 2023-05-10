@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 
-public class EyeTracker2 : MonoBehaviour
+public class NewEyeTracker : MonoBehaviour
 {
     public float logTimeInterval = 0.15f;
     public List<GameObject> gazeTargets = new List<GameObject>();
