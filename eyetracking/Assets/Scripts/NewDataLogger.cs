@@ -28,7 +28,7 @@ public class NewDataLogger : MonoBehaviour
 
     void Update()
     {
-        Vector2 curTextureCoord = eyeTracker.GetTextureCoord(new Ray(eyeTracker.transform.position, eyeTracker.transform.forward));
+        Vector2 curTextureCoord = eyeTracker.gazePointOnQuad;
         if (curTextureCoord != prevTextureCoord)
         {
             Log(curTextureCoord);

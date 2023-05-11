@@ -4,8 +4,7 @@ using UnityEngine.XR;
 
 public class EyeTracker : MonoBehaviour
 {
-    public float nextActionTime = 0.0f;
-    public float period = 1.0f;
+
     public List<GameObject> gazeTargets = new List<GameObject>();
     private LineRenderer lineRenderer;
 

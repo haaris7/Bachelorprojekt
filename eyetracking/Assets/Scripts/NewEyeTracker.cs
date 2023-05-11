@@ -15,6 +15,7 @@ public class NewEyeTracker : MonoBehaviour
     [SerializeField]
     private float gazeDistance = 10f;
     public Vector3 gazePoint;
+    public Vector3 gazePointOnQuad;
     public string TargetName = "";
     private float previoustime;
 
@@ -70,8 +71,11 @@ public class NewEyeTracker : MonoBehaviour
                 gazePoint = (gazeDirection * gazeDistance);
 
                 Ray ray = new Ray(eyeCenterPosition, gazeDirection);
+                if (ShouldCheck())
+                {
+                    gazePointOnQuad = GetTextureCoord(ray);
+                }
                 RaycastHit hit;
-                GetTextureCoord(ray);
                 if (Physics.Raycast(ray, out hit, gazeDistance, gazeLayerMask))
                 {
                     GameObject hitObject = hit.collider.gameObject;
