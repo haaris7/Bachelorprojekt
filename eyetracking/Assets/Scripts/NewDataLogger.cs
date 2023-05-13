@@ -5,7 +5,7 @@ using UnityEngine;
 public class NewDataLogger : MonoBehaviour
 {
     private char sep = ';';
-    private string header = "Timestamp;Region;Target;TextureCoordX;TextureCoordY";
+    private string header = "GazeTime;Region;Target;PosX;PosY";
     private string filenameBase = "GazeData";
     public string pathPrefix = "Assets/Scripts/Data/";
     private string path;
@@ -13,6 +13,7 @@ public class NewDataLogger : MonoBehaviour
     public NewEyeTracker eyeTracker;
     public string currentFileName = "";
     private Vector2 prevTextureCoord;
+    public bool useRegion = false;
 
     void Start()
     {
@@ -23,17 +24,15 @@ public class NewDataLogger : MonoBehaviour
         {
             writer.WriteLine(header);
         }
-        prevTextureCoord = eyeTracker.GetTextureCoord(new Ray(eyeTracker.transform.position, eyeTracker.transform.forward));
     }
 
     void Update()
     {
-        Vector2 curTextureCoord = eyeTracker.gazePointOnQuad;
-        if (curTextureCoord != prevTextureCoord)
+        if (eyeTracker.Check())
         {
-            Log(curTextureCoord);
-            prevTextureCoord = curTextureCoord;
+            Log(eyeTracker.gazePointOnQuad);
         }
+        
     }
 
     public string genFileName()
@@ -72,19 +71,21 @@ public class NewDataLogger : MonoBehaviour
 
     public void Log(Vector2 textureCoord)
     {
-        string line = Time.time.ToString() + sep;
-        line += activeregion + sep;
+        string line = eyeTracker.duration.ToString() + sep;
+        line += activeregion.ToString() + sep;
         line += DetermineTarget() + sep;
-        line += textureCoord.x + sep + textureCoord.y;
+        line += textureCoord.x.ToString()+sep+textureCoord.y.ToString()+sep;
+        
         using (StreamWriter writer = new StreamWriter(path, true))
         {
             writer.WriteLine(line);
         }
+        //UnityEngine.Debug.Log(line);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Start")
+        if (other.tag == "Start" && useRegion)
         {
             activeregion++;
         }

@@ -1961,18 +1961,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b1a92593a72e46408dbaad9e2106822, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logTimeInterval: 0.015
+  logTimeInterval: 5
   gazeTargets:
   - {fileID: 1636235884}
   gazeLayerMask:
     serializedVersion: 2
     m_Bits: 8
   gazeDistance: 10
+  prevgazePointOnQuad: {x: 0, y: 0}
   gazePoint: {x: 0, y: 0, z: 0}
-  gazePointOnQuad: {x: 0, y: 0, z: 0}
+  gazePointOnQuad: {x: 0, y: 0}
   TargetName: 
-  usePositionThreshold: 0
-  positionThreshold: 0.01
+  duration: 0
+  usePositionThreshold: 1
+  positionThreshold: 0.02
 --- !u!114 &198703414031458640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1989,6 +1991,7 @@ MonoBehaviour:
   activeregion: 0
   eyeTracker: {fileID: 198703414031458639}
   currentFileName: 
+  useRegion: 0
 --- !u!1001 &198703414259872026
 PrefabInstance:
   m_ObjectHideFlags: 0

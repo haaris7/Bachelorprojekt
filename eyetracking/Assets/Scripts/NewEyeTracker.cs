@@ -14,14 +14,17 @@ public class NewEyeTracker : MonoBehaviour
     private LayerMask gazeLayerMask;
     [SerializeField]
     private float gazeDistance = 10f;
+    public Vector2 prevgazePointOnQuad;
     public Vector3 gazePoint;
-    public Vector3 gazePointOnQuad;
+    public Vector2 gazePointOnQuad;
     public string TargetName = "";
     private float previoustime;
+    public float duration;
 
     public bool usePositionThreshold = true;
-    public float positionThreshold = 0.05f;
+    public float positionThreshold;
     private Vector2 lastLoggedPosition;
+    private Ray ray;
 
     private void Start()
     {
@@ -35,6 +38,7 @@ public class NewEyeTracker : MonoBehaviour
         lineRenderer.material = new Material(Shader.Find("Standard"));
         lineRenderer.startColor = Color.red;
         lineRenderer.endColor = Color.red;
+        prevgazePointOnQuad = new Vector2(0.5f,0.5f);
     }
 
     private void Update()
@@ -70,11 +74,8 @@ public class NewEyeTracker : MonoBehaviour
                 gazeDirection = transform.TransformDirection(gazeDirection);
                 gazePoint = (gazeDirection * gazeDistance);
 
-                Ray ray = new Ray(eyeCenterPosition, gazeDirection);
-                if (ShouldCheck())
-                {
-                    gazePointOnQuad = GetTextureCoord(ray);
-                }
+                ray = new Ray(eyeCenterPosition, gazeDirection);
+                gazePointOnQuad = GetTextureCoord(ray);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, gazeDistance, gazeLayerMask))
                 {
@@ -130,31 +131,30 @@ public class NewEyeTracker : MonoBehaviour
         }
     }
 
-    public bool ShouldCheck()
+    public bool Check()
     {
         float now = Time.time;
 
         if (usePositionThreshold)
         {
-            RaycastHit hit;
-            Ray ray = new Ray(transform.position, transform.forward);
-
-            if (Physics.Raycast(ray, out hit, gazeDistance, gazeLayerMask))
+            Vector2 tmp = GetTextureCoord(ray); 
+            if(gazePointOnQuad != null && Vector2.Distance(tmp,prevgazePointOnQuad) > positionThreshold)
             {
-                Vector2 currentTextureCoord = hit.textureCoord;
-
-                if (Vector2.Distance(currentTextureCoord, lastLoggedPosition) > positionThreshold)
-                {
-                    lastLoggedPosition = currentTextureCoord;
-                    return true;
-                }
+                prevgazePointOnQuad = tmp;
+                duration = now - previoustime;
+                previoustime = now;
+                Debug.Log(duration);
+                return true;
             }
+            else return false;
         }
         else
         {
             if (now - previoustime > logTimeInterval)
             {
+                duration = now - previoustime;
                 previoustime = now;
+
                 return true;
             }
         }
@@ -167,7 +167,7 @@ public class NewEyeTracker : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, gazeDistance, LayerMask.GetMask("HeatLayer")))
         {
-            Debug.Log("Coordinate: (" + hit.textureCoord.x + "," + hit.textureCoord.y + ")");
+            //Debug.Log("Coordinate: (" + hit.textureCoord.x + "," + hit.textureCoord.y + ")");
             return hit.textureCoord;
         }
         else
