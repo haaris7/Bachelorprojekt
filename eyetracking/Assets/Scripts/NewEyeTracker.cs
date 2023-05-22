@@ -13,7 +13,11 @@ public class NewEyeTracker : MonoBehaviour
     [SerializeField]
     private LayerMask gazeLayerMask;
     [SerializeField]
+    private LayerMask boundsLayerMask;
+    [SerializeField]
     private float gazeDistance = 10f;
+
+    private float def;
     public Vector2 prevgazePointOnQuad;
     public Vector3 gazePoint;
     public Vector2 gazePointOnQuad;
@@ -38,7 +42,8 @@ public class NewEyeTracker : MonoBehaviour
         lineRenderer.material = new Material(Shader.Find("Standard"));
         lineRenderer.startColor = Color.red;
         lineRenderer.endColor = Color.red;
-        prevgazePointOnQuad = new Vector2(0.5f,0.5f);
+        prevgazePointOnQuad = new Vector2(0.5f, 0.5f);
+        def = gazeDistance;
     }
 
     private void Update()
@@ -77,6 +82,7 @@ public class NewEyeTracker : MonoBehaviour
                 ray = new Ray(eyeCenterPosition, gazeDirection);
                 gazePointOnQuad = GetTextureCoord(ray);
                 RaycastHit hit;
+                AdjustGazeDistance();
                 if (Physics.Raycast(ray, out hit, gazeDistance, gazeLayerMask))
                 {
                     GameObject hitObject = hit.collider.gameObject;
@@ -131,14 +137,30 @@ public class NewEyeTracker : MonoBehaviour
         }
     }
 
+    public void AdjustGazeDistance()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, gazeDistance, boundsLayerMask))
+        {
+            //Debug.DrawRay(ray.origin, ray.direction * gazeDistance, Color.blue, 1f);
+            gazeDistance = Vector3.Distance(hit.point, this.transform.position);
+            //Debug.Log("Raycast hit: " + hit.collider.name); // New debug line
+        }
+        else if (gazeDistance != def)
+        {
+            gazeDistance = def;
+            //Debug.Log("Resetting gaze distance"); // New debug line
+        }
+    }
+
     public bool Check()
     {
         float now = Time.time;
 
         if (usePositionThreshold)
         {
-            Vector2 tmp = GetTextureCoord(ray); 
-            if(gazePointOnQuad != null && Vector2.Distance(tmp,prevgazePointOnQuad) > positionThreshold)
+            Vector2 tmp = GetTextureCoord(ray);
+            if (gazePointOnQuad != null && Vector2.Distance(tmp, prevgazePointOnQuad) > positionThreshold)
             {
                 prevgazePointOnQuad = tmp;
                 duration = now - previoustime;
