@@ -5,7 +5,7 @@ using UnityEngine;
 public class NewDataLogger : MonoBehaviour
 {
     private char sep = ';';
-    private string header = "GazeTime;Region;Target;PosX;PosY";
+    private string header = "GazeTime;Region;Target;PosX;PosY;PosZ;PlayerPosX;PlayerPosY;PlayerPosZ";
     private string filenameBase = "GazeData";
     public string pathPrefix = "Assets/Scripts/Data/";
     private string path;
@@ -30,7 +30,7 @@ public class NewDataLogger : MonoBehaviour
     {
         if (eyeTracker.Check() && IsLogging)
         {
-            Log(eyeTracker.gazePointOnQuad);
+            Log(eyeTracker.gazePoint);
         }
         
     }
@@ -75,6 +75,22 @@ public class NewDataLogger : MonoBehaviour
         line += activeregion.ToString() + sep;
         line += DetermineTarget() + sep;
         line += textureCoord.x.ToString()+sep+textureCoord.y.ToString()+sep;
+        line += transform.position.x.ToString()+sep+transform.position.y.ToString();
+        
+        using (StreamWriter writer = new StreamWriter(path, true))
+        {
+            writer.WriteLine(line);
+        }
+        //UnityEngine.Debug.Log(line);
+    }
+
+    public void Log(Vector3 pos)
+    {
+        string line = eyeTracker.duration.ToString() + sep;
+        line += activeregion.ToString() + sep;
+        line += DetermineTarget() + sep;
+        line += pos.x.ToString()+sep+pos.y.ToString()+sep+ pos.z.ToString()+sep;
+        line += transform.position.x.ToString()+sep+transform.position.y.ToString()+sep+transform.position.z.ToString();
         
         using (StreamWriter writer = new StreamWriter(path, true))
         {
