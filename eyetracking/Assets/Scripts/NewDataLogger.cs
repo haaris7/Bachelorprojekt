@@ -13,7 +13,7 @@ public class NewDataLogger : MonoBehaviour
     public NewEyeTracker eyeTracker;
     public string currentFileName = "";
     private Vector2 prevTextureCoord;
-    public bool useRegion = false;
+    public bool IsLogging = false;
 
     void Start()
     {
@@ -28,7 +28,7 @@ public class NewDataLogger : MonoBehaviour
 
     void Update()
     {
-        if (eyeTracker.Check())
+        if (eyeTracker.Check() && IsLogging)
         {
             Log(eyeTracker.gazePointOnQuad);
         }
@@ -85,9 +85,17 @@ public class NewDataLogger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Start" && useRegion)
+        if(other.tag == "Start")
         {
+            IsLogging = true;
+            // UnityEngine.Debug.Log("Enter");
+
             activeregion++;
+        }
+        else if(other.tag == "Stop")
+        {
+            // UnityEngine.Debug.Log("Exit");
+            IsLogging = false;
         }
     }
 }
