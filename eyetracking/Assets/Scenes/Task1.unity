@@ -4146,8 +4146,9 @@ MonoBehaviour:
   gazePointOnQuad: {x: 0, y: 0}
   TargetName: 
   duration: 0.05
-  usePositionThreshold: 0
-  positionThreshold: 0
+  usePositionThreshold: 1
+  positionThreshold: 0.05
+  aimAssistStrength: 0.175
 --- !u!1001 &198703414259872026
 PrefabInstance:
   m_ObjectHideFlags: 0

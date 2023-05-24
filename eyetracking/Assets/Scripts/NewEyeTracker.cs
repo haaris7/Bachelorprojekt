@@ -30,6 +30,8 @@ public class NewEyeTracker : MonoBehaviour
     private Vector2 lastLoggedPosition;
     private Ray ray;
 
+    public float aimAssistStrength = 0.5f; // New variable for aim assist strength
+
     private void Start()
     {
         previoustime = Time.time;
@@ -77,6 +79,26 @@ public class NewEyeTracker : MonoBehaviour
 
                 eyeCenterPosition = transform.TransformPoint(eyeCenterPosition);
                 gazeDirection = transform.TransformDirection(gazeDirection);
+
+                // Aim assist code
+                GameObject nearestTarget = null;
+                float nearestDistance = Mathf.Infinity;
+                foreach (GameObject target in gazeTargets)
+                {
+                    float distance = Vector3.Distance(eyeCenterPosition, target.transform.position);
+                    if (distance < nearestDistance)
+                    {
+                        nearestTarget = target;
+                        nearestDistance = distance;
+                    }
+                }
+
+                if (nearestTarget != null)
+                {
+                    Vector3 targetDirection = (nearestTarget.transform.position - eyeCenterPosition).normalized;
+                    gazeDirection = Vector3.Lerp(gazeDirection, targetDirection, aimAssistStrength);
+                }
+
                 gazePoint = (gazeDirection * gazeDistance);
 
                 ray = new Ray(eyeCenterPosition, gazeDirection);
@@ -142,14 +164,11 @@ public class NewEyeTracker : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, gazeDistance, boundsLayerMask))
         {
-            //Debug.DrawRay(ray.origin, ray.direction * gazeDistance, Color.blue, 1f);
             gazeDistance = Vector3.Distance(hit.point, this.transform.position);
-            //Debug.Log("Raycast hit: " + hit.collider.name); // New debug line
         }
         else if (gazeDistance != def)
         {
             gazeDistance = def;
-            //Debug.Log("Resetting gaze distance"); // New debug line
         }
     }
 
@@ -189,7 +208,6 @@ public class NewEyeTracker : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, gazeDistance, LayerMask.GetMask("HeatLayer")))
         {
-            //Debug.Log("Coordinate: (" + hit.textureCoord.x + "," + hit.textureCoord.y + ")");
             return hit.textureCoord;
         }
         else
