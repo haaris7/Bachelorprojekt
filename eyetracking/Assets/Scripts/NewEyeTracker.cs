@@ -206,7 +206,6 @@ public class NewEyeTracker : MonoBehaviour
                 prevgazePointOnQuad = tmp;
                 duration = now - previoustime;
                 previoustime = now;
-                Debug.Log(duration);
                 return true;
             }
             else return false;

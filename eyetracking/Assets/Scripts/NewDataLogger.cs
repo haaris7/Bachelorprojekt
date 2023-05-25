@@ -5,7 +5,7 @@ using UnityEngine;
 public class NewDataLogger : MonoBehaviour
 {
     private char sep = ';';
-    private string header = "GazeTime;Region;Target;PosX;PosY;PosZ;PlayerPosX;PlayerPosY;PlayerPosZ";
+    private string header = "GazeTime;Region;Target;PosX;PosY;PosZ;PlayerPosX;PlayerPosY;PlayerPosZ;Eccentricity;Proximity";
     private string filenameBase = "GazeData";
     public string pathPrefix = "Assets/Scripts/Data/";
     private string path;
@@ -14,6 +14,8 @@ public class NewDataLogger : MonoBehaviour
     public string currentFileName = "";
     private Vector2 prevTextureCoord;
     public bool IsLogging = false;
+    public float eccentricity;
+    public float proximity;
 
     void Start()
     {
@@ -81,8 +83,8 @@ public class NewDataLogger : MonoBehaviour
         Vector3 eyePosition = eyeTracker.GetEyePosition();
         Vector3 objectDirection = (pos - eyePosition).normalized;
         Vector3 gazeDirection = (eyeTracker.gazePoint - eyePosition).normalized;
-        float eccentricity = Vector3.Angle(gazeDirection, objectDirection);
-        float proximity = Vector3.Distance(eyePosition, pos);
+        eccentricity = Vector3.Angle(gazeDirection, objectDirection);
+        proximity = Vector3.Distance(eyePosition, pos);
         line += eccentricity.ToString() + sep + proximity.ToString();
 
         using (StreamWriter writer = new StreamWriter(path, true))

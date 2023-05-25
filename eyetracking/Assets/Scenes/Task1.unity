@@ -4116,7 +4116,9 @@ MonoBehaviour:
   activeregion: 0
   eyeTracker: {fileID: 198703414031458640}
   currentFileName: 
-  useRegion: 1
+  IsLogging: 0
+  eccentricity: 0
+  proximity: 0
 --- !u!114 &198703414031458640
 MonoBehaviour:
   m_ObjectHideFlags: 0
