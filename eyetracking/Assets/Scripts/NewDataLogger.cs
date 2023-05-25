@@ -32,7 +32,7 @@ public class NewDataLogger : MonoBehaviour
         {
             Log(eyeTracker.gazePoint);
         }
-        
+
     }
 
     public string genFileName()
@@ -69,46 +69,40 @@ public class NewDataLogger : MonoBehaviour
         }
     }
 
-    public void Log(Vector2 textureCoord)
-    {
-        string line = eyeTracker.duration.ToString() + sep;
-        line += activeregion.ToString() + sep;
-        line += DetermineTarget() + sep;
-        line += textureCoord.x.ToString()+sep+textureCoord.y.ToString()+sep;
-        line += transform.position.x.ToString()+sep+transform.position.y.ToString();
-        
-        using (StreamWriter writer = new StreamWriter(path, true))
-        {
-            writer.WriteLine(line);
-        }
-        //UnityEngine.Debug.Log(line);
-    }
-
     public void Log(Vector3 pos)
     {
         string line = eyeTracker.duration.ToString() + sep;
         line += activeregion.ToString() + sep;
         line += DetermineTarget() + sep;
-        line += pos.x.ToString()+sep+pos.y.ToString()+sep+ pos.z.ToString()+sep;
-        line += transform.position.x.ToString()+sep+transform.position.y.ToString()+sep+transform.position.z.ToString();
-        
+        line += pos.x.ToString() + sep + pos.y.ToString() + sep + pos.z.ToString() + sep;
+        line += transform.position.x.ToString() + sep + transform.position.y.ToString() + sep + transform.position.z.ToString() + sep;
+
+        // Calculate the eccentricity and proximity and log them.
+        Vector3 eyePosition = eyeTracker.GetEyePosition();
+        Vector3 objectDirection = (pos - eyePosition).normalized;
+        Vector3 gazeDirection = (eyeTracker.gazePoint - eyePosition).normalized;
+        float eccentricity = Vector3.Angle(gazeDirection, objectDirection);
+        float proximity = Vector3.Distance(eyePosition, pos);
+        line += eccentricity.ToString() + sep + proximity.ToString();
+
         using (StreamWriter writer = new StreamWriter(path, true))
         {
             writer.WriteLine(line);
         }
-        //UnityEngine.Debug.Log(line);
+        // UnityEngine.Debug.Log(line);
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Start")
+        if (other.tag == "Start")
         {
             IsLogging = true;
             // UnityEngine.Debug.Log("Enter");
 
             activeregion++;
         }
-        else if(other.tag == "Stop")
+        else if (other.tag == "Stop")
         {
             // UnityEngine.Debug.Log("Exit");
             IsLogging = false;

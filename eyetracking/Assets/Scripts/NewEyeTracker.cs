@@ -158,6 +158,28 @@ public class NewEyeTracker : MonoBehaviour
             }
         }
     }
+    public Vector3 GetEyePosition()
+    {
+        List<InputDevice> devices = new List<InputDevice>();
+        InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.HeadMounted, devices);
+
+        if (devices.Count > 0)
+        {
+            InputDevice device = devices[0];
+
+            Vector3 leftEyePosition;
+            Vector3 rightEyePosition;
+
+            if (device.TryGetFeatureValue(CommonUsages.leftEyePosition, out leftEyePosition) &&
+                device.TryGetFeatureValue(CommonUsages.rightEyePosition, out rightEyePosition))
+            {
+                Vector3 eyeCenterPosition = (leftEyePosition + rightEyePosition) / 2f;
+                return eyeCenterPosition;
+            }
+        }
+        // Return zero vector if eye positions can't be determined.
+        return Vector3.zero;
+    }
 
     public void AdjustGazeDistance()
     {
