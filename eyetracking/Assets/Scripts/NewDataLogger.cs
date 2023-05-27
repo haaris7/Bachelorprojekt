@@ -1,24 +1,42 @@
 using System;
 using System.IO;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NewDataLogger : MonoBehaviour
 {
     private char sep = ';';
-    private string header = "GazeTime;Region;Target;PosX;PosY;PosZ;PlayerPosX;PlayerPosY;PlayerPosZ;Eccentricity;Proximity";
+    private string header = "GazeTime;Region;Target;PosX;PosY;PosZ;PlayerPosX;PlayerPosY;PlayerPosZ;LightIntensity;Velocity";
     private string filenameBase = "GazeData";
-    public string pathPrefix = "Assets/Scripts/Data/";
+    private string sceneName = "";
+    public string pathPrefix;
     private string path;
     public int activeregion = 0;
     public NewEyeTracker eyeTracker;
-    public string currentFileName = "";
     private Vector2 prevTextureCoord;
     public bool IsLogging = false;
-    public float eccentricity;
-    public float proximity;
+
+    private string counterFilePath; //"Assets/Scripts/Data/counter.txt";
+    private int counter = 1;
 
     void Start()
     {
+        counterFilePath = Path.Combine(Application.persistentDataPath, "counter.txt");
+        pathPrefix = Application.persistentDataPath.ToString();
+        sceneName = SceneManager.GetActiveScene().name;
+        Directory.CreateDirectory(pathPrefix + sceneName);
+        
+        // Load the counter from a file.
+        if (File.Exists(counterFilePath))
+        {
+            string counterString = File.ReadAllText(counterFilePath);
+            if (!int.TryParse(counterString, out counter))
+            {
+                Debug.LogError("Could not parse counter file");
+                counter = 1;
+            }
+        }
+
         path = genFileName();
         FileStream fs = File.Create(path);
         fs.Close();
@@ -34,26 +52,27 @@ public class NewDataLogger : MonoBehaviour
         {
             Log(eyeTracker.gazePoint);
         }
-
     }
 
     public string genFileName()
     {
-        int counter = 1;
-        string ret = pathPrefix + filenameBase + counter + ".csv";
-        string[] dir = Directory.GetFiles(pathPrefix);
-        if (dir.Length != 0)
+        string ret = "";
+
+        // Loop until we find a file name that doesn't exist.
+        while (true)
         {
-            foreach (string item in dir)
+            ret = pathPrefix + sceneName + "/" + filenameBase + "_" + counter + ".csv";
+            if (!File.Exists(ret))
             {
-                ret = pathPrefix + filenameBase + counter + ".csv";
-                if (item == pathPrefix + filenameBase + counter + ".csv")
-                {
-                    counter++;
-                }
+                // If the file doesn't exist, break the loop.
+                break;
             }
+            counter++;
         }
-        currentFileName = filenameBase + "(" + counter + ")_";
+
+        // Save the counter back to a file.
+        File.WriteAllText(counterFilePath, counter.ToString());
+
         return ret;
     }
 
@@ -78,36 +97,30 @@ public class NewDataLogger : MonoBehaviour
         line += DetermineTarget() + sep;
         line += pos.x.ToString() + sep + pos.y.ToString() + sep + pos.z.ToString() + sep;
         line += transform.position.x.ToString() + sep + transform.position.y.ToString() + sep + transform.position.z.ToString() + sep;
-
-        // Calculate the eccentricity and proximity and log them.
-        Vector3 eyePosition = eyeTracker.GetEyePosition();
-        Vector3 objectDirection = (pos - eyePosition).normalized;
-        Vector3 gazeDirection = (eyeTracker.gazePoint - eyePosition).normalized;
-        eccentricity = Vector3.Angle(gazeDirection, objectDirection);
-        proximity = Vector3.Distance(eyePosition, pos);
-        line += eccentricity.ToString() + sep + proximity.ToString();
+        line += eyeTracker.intensity.ToString() + sep;
+        line += eyeTracker.velocity.ToString() + sep;
 
         using (StreamWriter writer = new StreamWriter(path, true))
         {
             writer.WriteLine(line);
         }
-        // UnityEngine.Debug.Log(line);
     }
-
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Start")
         {
             IsLogging = true;
-            // UnityEngine.Debug.Log("Enter");
-
             activeregion++;
         }
         else if (other.tag == "Stop")
         {
-            // UnityEngine.Debug.Log("Exit");
             IsLogging = false;
         }
     }
+
+
+
+
+    
 }

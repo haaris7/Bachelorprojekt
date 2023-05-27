@@ -30,7 +30,11 @@ public class NewEyeTracker : MonoBehaviour
     private Vector2 lastLoggedPosition;
     private Ray ray;
 
-    public float aimAssistStrength = 0.5f; // New variable for aim assist strength
+    public float aimAssistStrength = 0.175f; // New variable for aim assist strength
+    public bool hasLight = false;
+    public bool hasVelocity = false;
+    public float intensity = 0f;
+    public float velocity = 0f;
 
     private void Start()
     {
@@ -41,9 +45,8 @@ public class NewEyeTracker : MonoBehaviour
         lineRenderer.endWidth = 0.01f;
         lineRenderer.positionCount = 2;
 
-        lineRenderer.material = new Material(Shader.Find("Standard"));
-        lineRenderer.startColor = Color.red;
-        lineRenderer.endColor = Color.red;
+        lineRenderer.material = new Material(Shader.Find("Unlit/Color"));
+        lineRenderer.material.SetColor("_Color", Color.red);
         prevgazePointOnQuad = new Vector2(0.5f, 0.5f);
         def = gazeDistance;
     }
@@ -109,7 +112,17 @@ public class NewEyeTracker : MonoBehaviour
                 {
                     GameObject hitObject = hit.collider.gameObject;
 
+
                     bool isValidTarget = false;
+                    Transform pointLight = hitObject.transform.Find("Point Light");
+                    if (hasLight != true && pointLight != null)
+                    {
+                        hasLight = true;
+                    }
+                    if(hitObject.GetComponent<Rigidbody>())
+                    {
+                        hasVelocity = true;
+                    }
 
                     foreach (GameObject parent in gazeTargets)
                     {
@@ -118,11 +131,20 @@ public class NewEyeTracker : MonoBehaviour
                             isValidTarget = true;
                             break;
                         }
+
                     }
 
                     if (isValidTarget)
                     {
                         TargetName = hitObject.name;
+                        if (hasLight)
+                        {
+                            intensity = hitObject.transform.Find("Point Light").GetComponent<Light>().intensity;
+                        }
+                        if(hasVelocity)
+                        {
+                            velocity = hitObject.GetComponent<Rigidbody>().velocity.magnitude;
+                        }
                         if (currentGazeTarget != hitObject)
                         {
                             if (currentGazeTarget != null)

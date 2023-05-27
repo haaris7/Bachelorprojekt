@@ -98,7 +98,8 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 0}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 71d50a177eaca9844972b921bc78d580,
+    type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -136,7 +137,7 @@ GameObject:
   - component: {fileID: 5880038}
   - component: {fileID: 5880037}
   - component: {fileID: 5880036}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +244,7 @@ GameObject:
   m_Component:
   - component: {fileID: 36352956}
   - component: {fileID: 36352957}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,7 +340,7 @@ GameObject:
   - component: {fileID: 95677666}
   - component: {fileID: 95677665}
   - component: {fileID: 95677664}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -449,7 +450,7 @@ GameObject:
   - component: {fileID: 104288839}
   - component: {fileID: 104288838}
   - component: {fileID: 104288837}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -556,7 +557,7 @@ GameObject:
   m_Component:
   - component: {fileID: 221256171}
   - component: {fileID: 221256172}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -649,7 +650,7 @@ GameObject:
   m_Component:
   - component: {fileID: 237559637}
   - component: {fileID: 237559638}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -745,7 +746,7 @@ GameObject:
   - component: {fileID: 242174433}
   - component: {fileID: 242174432}
   - component: {fileID: 242174431}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -852,7 +853,7 @@ GameObject:
   m_Component:
   - component: {fileID: 289013078}
   - component: {fileID: 289013079}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -945,7 +946,7 @@ GameObject:
   m_Component:
   - component: {fileID: 305832594}
   - component: {fileID: 305832595}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1038,7 +1039,7 @@ GameObject:
   m_Component:
   - component: {fileID: 366021424}
   - component: {fileID: 366021425}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1131,7 +1132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 372515446}
   - component: {fileID: 372515447}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1224,7 +1225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 386956104}
   - component: {fileID: 386956105}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1317,7 +1318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 419147456}
   - component: {fileID: 419147457}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1413,7 +1414,7 @@ GameObject:
   - component: {fileID: 446272690}
   - component: {fileID: 446272689}
   - component: {fileID: 446272688}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1523,7 +1524,7 @@ GameObject:
   - component: {fileID: 619427756}
   - component: {fileID: 619427755}
   - component: {fileID: 619427754}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1660,7 +1661,7 @@ GameObject:
   m_Component:
   - component: {fileID: 724674188}
   - component: {fileID: 724674189}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1849,7 +1850,7 @@ GameObject:
   - component: {fileID: 746276261}
   - component: {fileID: 746276260}
   - component: {fileID: 746276259}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1956,7 +1957,7 @@ GameObject:
   m_Component:
   - component: {fileID: 799813692}
   - component: {fileID: 799813693}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2052,7 +2053,7 @@ GameObject:
   - component: {fileID: 815046669}
   - component: {fileID: 815046668}
   - component: {fileID: 815046667}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2159,7 +2160,7 @@ GameObject:
   m_Component:
   - component: {fileID: 841427984}
   - component: {fileID: 841427985}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2255,7 +2256,7 @@ GameObject:
   - component: {fileID: 856964784}
   - component: {fileID: 856964783}
   - component: {fileID: 856964782}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2362,7 +2363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 877653828}
   - component: {fileID: 877653829}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2458,7 +2459,7 @@ GameObject:
   - component: {fileID: 888145075}
   - component: {fileID: 888145074}
   - component: {fileID: 888145073}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2568,7 +2569,7 @@ GameObject:
   - component: {fileID: 943124158}
   - component: {fileID: 943124157}
   - component: {fileID: 943124156}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2676,7 +2677,7 @@ GameObject:
   - component: {fileID: 945073169}
   - component: {fileID: 945073168}
   - component: {fileID: 945073170}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orbs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2748,8 +2749,8 @@ MonoBehaviour:
   - {fileID: 945073167}
   objectAreas:
   - {fileID: 1218048054}
-  repeatInterval: 3
-  repeatTimes: 10
+  repeatInterval: 5
+  repeatTimes: 5
 --- !u!1 &1089925872
 GameObject:
   m_ObjectHideFlags: 0
@@ -2760,7 +2761,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1089925873}
   - component: {fileID: 1089925874}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2856,7 +2857,7 @@ GameObject:
   - component: {fileID: 1116906149}
   - component: {fileID: 1116906148}
   - component: {fileID: 1116906147}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2966,7 +2967,7 @@ GameObject:
   - component: {fileID: 1157430510}
   - component: {fileID: 1157430509}
   - component: {fileID: 1157430508}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3076,7 +3077,7 @@ GameObject:
   - component: {fileID: 1166473657}
   - component: {fileID: 1166473656}
   - component: {fileID: 1166473655}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3200,8 +3201,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1218048054}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 20, z: 0}
-  m_LocalScale: {x: 40, y: 40, z: 19.71}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalScale: {x: 40, y: 20, z: 19.71}
   m_Children: []
   m_Father: {fileID: 3615713148010531709}
   m_RootOrder: 1
@@ -3281,7 +3282,7 @@ GameObject:
   - component: {fileID: 1240446245}
   - component: {fileID: 1240446244}
   - component: {fileID: 1240446243}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3378,6 +3379,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240446241}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1269309872
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1269309874}
+  - component: {fileID: 1269309873}
+  m_Layer: 0
+  m_Name: Switch
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1269309873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269309872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09344847414bf3341827beaaeea0ca47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  time: 26
+  taskname: Task4
+--- !u!4 &1269309874
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269309872}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.96597904, y: 2.3412077, z: -2.859665}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1282271126
 GameObject:
   m_ObjectHideFlags: 0
@@ -3388,7 +3434,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1282271127}
   - component: {fileID: 1282271128}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3484,7 +3530,7 @@ GameObject:
   - component: {fileID: 1291532468}
   - component: {fileID: 1291532467}
   - component: {fileID: 1291532466}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3594,7 +3640,7 @@ GameObject:
   - component: {fileID: 1307368657}
   - component: {fileID: 1307368656}
   - component: {fileID: 1307368655}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (13)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3701,7 +3747,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1599854538}
   - component: {fileID: 1599854539}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3797,7 +3843,7 @@ GameObject:
   - component: {fileID: 1646948598}
   - component: {fileID: 1646948597}
   - component: {fileID: 1646948596}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3904,7 +3950,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1670379138}
   - component: {fileID: 1670379139}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4000,7 +4046,7 @@ GameObject:
   - component: {fileID: 1717538724}
   - component: {fileID: 1717538723}
   - component: {fileID: 1717538722}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4107,7 +4153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1720868899}
   - component: {fileID: 1720868900}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4200,7 +4246,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1852201702}
   - component: {fileID: 1852201703}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4293,7 +4339,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2029086212}
   - component: {fileID: 2029086213}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4389,7 +4435,7 @@ GameObject:
   - component: {fileID: 2030020533}
   - component: {fileID: 2030020532}
   - component: {fileID: 2030020531}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4499,7 +4545,7 @@ GameObject:
   - component: {fileID: 2070930776}
   - component: {fileID: 2070930775}
   - component: {fileID: 2070930774}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Orb (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4606,7 +4652,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2077640922}
   - component: {fileID: 2077640923}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4934,6 +4980,8 @@ GameObject:
   - component: {fileID: 198703414031458637}
   - component: {fileID: 716472140}
   - component: {fileID: 716472139}
+  - component: {fileID: 198703414031458640}
+  - component: {fileID: 198703414031458639}
   m_Layer: 0
   m_Name: XRRig
   m_TagString: Untagged
@@ -4966,7 +5014,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 198703414031458636}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.3614397, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 198703413103863724}
@@ -4975,6 +5023,56 @@ Transform:
   m_Father: {fileID: 3615713148010531709}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &198703414031458639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198703414031458636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b1a92593a72e46408dbaad9e2106822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  logTimeInterval: 0.05
+  gazeTargets:
+  - {fileID: 945073167}
+  gazeLayerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  boundsLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  gazeDistance: 30
+  prevgazePointOnQuad: {x: 0, y: 0}
+  gazePoint: {x: 0, y: 0, z: 0}
+  gazePointOnQuad: {x: 0, y: 0}
+  TargetName: 
+  duration: 0
+  usePositionThreshold: 0
+  positionThreshold: 0
+  aimAssistStrength: 0.175
+  hasLight: 0
+  hasVelocity: 0
+  intensity: 0
+  velocity: 0
+--- !u!114 &198703414031458640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 198703414031458636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6809f2809189a64408c82c0405a204c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathPrefix: Assets/Scripts/Data/
+  activeregion: 0
+  eyeTracker: {fileID: 198703414031458639}
+  IsLogging: 1
 --- !u!1001 &198703414259872026
 PrefabInstance:
   m_ObjectHideFlags: 0

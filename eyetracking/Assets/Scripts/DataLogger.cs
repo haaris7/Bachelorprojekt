@@ -183,7 +183,7 @@ public class DataLogger : MonoBehaviour
         if(other.tag == "Start")
         {
             cam = other.gameObject.GetComponent<Camera>();
-            TakeScreenshot(cam);
+            //TakeScreenshot(cam);
             IsLogging = true;
             // UnityEngine.Debug.Log("Enter");
 
