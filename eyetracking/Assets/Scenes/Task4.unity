@@ -267,7 +267,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSpeed: 0.25
-  maxSpeed: 0.75
+  maxSpeed: 1
+  repeatTimes: 3
 --- !u!4 &87204052
 Transform:
   m_ObjectHideFlags: 0
@@ -2279,7 +2280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09344847414bf3341827beaaeea0ca47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 10
+  time: 25
   taskname: End
 --- !u!4 &1423839605
 Transform:
