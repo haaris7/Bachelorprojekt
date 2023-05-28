@@ -2044,7 +2044,7 @@ MonoBehaviour:
   pathPrefix: Assets/Scripts/Data/
   activeregion: 0
   eyeTracker: {fileID: 198703414031458639}
-  IsLogging: 0
+  IsLogging: 1
 --- !u!1001 &198703414259872026
 PrefabInstance:
   m_ObjectHideFlags: 0
