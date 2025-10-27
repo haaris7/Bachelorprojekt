@@ -1,0 +1,12 @@
+# IDE
+.idea/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# SaliencyData - ignore all folders and CSV files inside
+SaliencyData/*/
+SaliencyData/*.csv
+
+# But keep the SaliencyData folder itself
+!SaliencyData/.gitkeep
